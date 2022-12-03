@@ -162,16 +162,20 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Radio(
-                                value: 1,
-                                groupValue: 'null',
-                                onChanged: (index) {}),
                             const Expanded(
                               child: Text(
                                 'Radio button 1',
                                 textAlign: TextAlign.right,
                               ),
-                            )
+                            ),
+                            Radio(
+                                value: 1, groupValue: 0, onChanged: (index) {}),
+                            // const Expanded(
+                            //   child: Text(
+                            //     'Radio button 1',
+                            //     textAlign: TextAlign.right,
+                            //   ),
+                            // )
                           ],
                         ),
                       ),
@@ -180,15 +184,18 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Radio(
-                                value: 1,
-                                groupValue: 'null',
-                                onChanged: (index) {}),
                             const Expanded(
                                 child: Text(
                               'Radio 2',
                               textAlign: TextAlign.right,
-                            ))
+                            )),
+                            Radio(
+                                value: 1, groupValue: 1, onChanged: (index) {}),
+                            // const Expanded(
+                            //     child: Text(
+                            //   'Radio 2',
+                            //   textAlign: TextAlign.right,
+                            // ))
                           ],
                         ),
                       ),
