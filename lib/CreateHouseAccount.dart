@@ -14,6 +14,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex;
+    var _role = 'viewer';
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Colors.white,
@@ -169,7 +170,13 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                               ),
                             ),
                             Radio(
-                                value: 1, groupValue: 0, onChanged: (index) {}),
+                                value: 'viewer',
+                                groupValue: _role,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _role = value.toString();
+                                  });
+                                }),
                             // const Expanded(
                             //   child: Text(
                             //     'Radio button 1',
@@ -190,7 +197,13 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                               textAlign: TextAlign.right,
                             )),
                             Radio(
-                                value: 1, groupValue: 1, onChanged: (index) {}),
+                                value: 'editor',
+                                groupValue: _role,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _role = value.toString();
+                                  });
+                                }),
                             // const Expanded(
                             //     child: Text(
                             //   'Radio 2',
