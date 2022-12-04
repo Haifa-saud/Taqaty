@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/CreateHouseAccount.dart';
-import 'package:flutter_application_1/ListOfHouseAccounts.dart';
+
+import 'create_house_account.dart';
 
 void main() {
   runApp(const MyApp());

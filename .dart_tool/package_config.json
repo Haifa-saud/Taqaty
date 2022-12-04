@@ -14,6 +14,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "bottom_navy_bar",
+      "rootUri": "file:///Users/haifasaud/.pub-cache/hosted/pub.dartlang.org/bottom_navy_bar-6.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///Users/haifasaud/.pub-cache/hosted/pub.dartlang.org/characters-1.2.1",
       "packageUri": "lib/",
@@ -60,6 +66,12 @@
       "rootUri": "file:///Users/haifasaud/Developer/flutter%204.56.01%20AM/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "google_nav_bar",
+      "rootUri": "file:///Users/haifasaud/.pub-cache/hosted/pub.dartlang.org/google_nav_bar-5.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "lints",
@@ -140,19 +152,13 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "water_drop_nav_bar",
-      "rootUri": "file:///Users/haifasaud/.pub-cache/hosted/pub.dartlang.org/water_drop_nav_bar-2.2.0+4",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "flutter_application_1",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-03T18:29:40.784319Z",
+  "generated": "2022-12-04T14:21:47.667036Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
