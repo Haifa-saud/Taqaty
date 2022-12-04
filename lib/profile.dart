@@ -1,22 +1,18 @@
 import 'package:hacathon/add_device.dart';
-
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 
-class Share extends StatefulWidget {
+class profile extends StatefulWidget {
   // final String userId;
-  const Share({super.key});
+  const profile({super.key});
   @override
-  shareState createState() => shareState();
+  profileState createState() => profileState();
 }
 
-class shareState extends State<Share> {
-  bool pop = false;
+class profileState extends State<profile> {
   final ScrollController _scrollController = ScrollController();
-  String comment = '';
-
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -24,24 +20,22 @@ class shareState extends State<Share> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('البيت'),
-          leading: Text(""),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.arrow_forward_ios),
-              onPressed: () {
-                setState(() {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(
-                  //       content: Text('الانتقال الى الصفحة السابقة')),
-                  // );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const add_device()),
-                  );
-                });
-              },
-            ),
+          title: const Text('مرحبا'),
+          leading: const Text(""),
+          actions: const [
+            // IconButton(
+            //   icon: const Icon(Icons.arrow_forward_ios),
+            //   onPressed: () {
+            //     setState(() {
+            //
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => const add_device()),
+            //       );
+            //     });
+            //   },
+            // ),
+            Text(""),
           ],
           elevation: 35,
         ),
@@ -52,7 +46,7 @@ class shareState extends State<Share> {
               const SizedBox(
                 height: 55,
               ),
-              Text(
+              const Text(
                 'مشاركة لوحة معلومات المنزل ',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
@@ -60,7 +54,7 @@ class shareState extends State<Share> {
                 height: 50,
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: TextFormField(
                   textAlign: TextAlign.right,
                   keyboardType: TextInputType.number,
@@ -70,7 +64,7 @@ class shareState extends State<Share> {
                   ],
                   decoration: InputDecoration(
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 13.0, horizontal: 15),
+                        const EdgeInsets.symmetric(vertical: 13.0, horizontal: 15),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -97,7 +91,7 @@ class shareState extends State<Share> {
               ),
               //*
               Container(
-                  margin: EdgeInsets.all(30),
+                  margin: const EdgeInsets.all(30),
                   child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {

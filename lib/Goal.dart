@@ -65,17 +65,17 @@ class goalState extends State<Goal> {
           child: Column(
             children: [
               const SizedBox(
-                height: 35,
+                height: 55,
               ),
               Text(
                 'حدد هدف لإجمالي استهلاك الطاقة',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               const SizedBox(
-                height: 20,
+                height: 70,
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(150, 0, 150, 0),
+                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextFormField(
                   textAlign: TextAlign.right,
                   keyboardType: TextInputType.number,
@@ -84,6 +84,8 @@ class goalState extends State<Goal> {
                     FilteringTextInputFormatter.digitsOnly
                   ],
                   decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 13.0, horizontal: 15),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -103,7 +105,7 @@ class goalState extends State<Goal> {
 
               //*
               const SizedBox(
-                height: 25,
+                height: 55,
               ),
               //*
               Container(
@@ -117,19 +119,19 @@ class goalState extends State<Goal> {
                           );
                         }
                       },
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(120, 15, 120, 15),
-                          child: Text(
-                            'حدد الهدف',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          )),
                       style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
-                      ))))),
+                      ))),
+                      child: const Padding(
+                          padding: EdgeInsets.fromLTRB(100, 15, 100, 15),
+                          child: Text(
+                            'حدد الهدف',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )))),
             ],
           ),
         ));

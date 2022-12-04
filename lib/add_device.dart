@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 
+import 'share_Dash.dart';
+
 class add_device extends StatefulWidget {
   // final String userId;
   const add_device({super.key});
@@ -12,36 +14,94 @@ class add_device extends StatefulWidget {
   add_deviceState createState() => add_deviceState();
 }
 
-const List<String> list = <String>['خيار ١', 'خيار ٢', 'خيار ٣', 'خيار ٤'];
+List<DropdownMenuItem<String>> get dropdownItems {
+  List<DropdownMenuItem<String>> menuItems = [
+    DropdownMenuItem(child: Text("LG TV"), value: "LG TV"),
+    DropdownMenuItem(child: Text("Kenwood cooker"), value: "Kenwood cooker"),
+    DropdownMenuItem(child: Text("SMEG toster"), value: "SMEG toster"),
+    DropdownMenuItem(child: Text("HP printer"), value: "HP printer"),
+  ];
+  return menuItems;
+}
+
+void initState() {
+  deviceController.text = 'v1';
+}
+
+TextEditingController deviceController = TextEditingController();
 
 class add_deviceState extends State<add_device> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    String dropdownValue = list.first;
+    String selectedValue = "LG TV";
+    String deviceChoice = '';
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('البيت'),
+          title: const Text('البيت'),
           leading: //Icon(Icons.more_vert)
               PopupMenuButton(
             onSelected: (value) {
+              if (value == 'share') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Share()),
+                );
+              }
+              if (value == 'delete') {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text(
+                      "حذف المنزل",
+                      textAlign: TextAlign.left,
+                    ),
+                    content: const Text(
+                      "هل أنت متأكد من حذف حساب المنزل ؟",
+                      textAlign: TextAlign.left,
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("الغاء"),
+                        ),
+                      ),
+                      //log in ok button
+                      TextButton(
+                        onPressed: () {
+                          // pop out
+                        },
+                        child: Container(
+                          
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("حذف",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 164, 10, 10))),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
               // your logic
             },
             itemBuilder: (BuildContext bc) {
               return const [
                 PopupMenuItem(
-                  child: Text("خيار ١"),
-                  value: '/hello',
+                  child: Text("مشاركة لوحة المعلومات "),
+                  value: 'share',
                 ),
                 PopupMenuItem(
-                  child: Text("خيار ٢"),
-                  value: '/about',
+                  child: Text("حذف حساب المنرل",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 167, 32, 32))),
+                  value: 'delete',
                 ),
-                PopupMenuItem(
-                  child: Text("خيار ٣"),
-                  value: '/contact',
-                )
               ];
             },
           ),
@@ -61,138 +121,209 @@ class add_deviceState extends State<add_device> {
           elevation: 35,
         ),
         body: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 35,
-              ),
-              Text(
-                'إضافة جهاز',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'الأجهزة المكتشفة',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              // Padding(
-              //   padding: EdgeInsets.fromLTRB(150, 0, 150, 0),
-              //   child: DropDownTextField(
-              //     initialValue: 'اختر جهاز',
-              //     //controller: _cnt,
-              //     clearOption: false,
-              //     enableSearch: false,
-              //     validator: (value) {
-              //       if (value == null) {
-              //         return "Required field";
-              //       } else {
-              //         return null;
-              //       }
-              //     },
-              //     dropDownItemCount: 4,
-              //     dropDownList: const [
-              //       DropDownValueModel(name: 'اختر جهاز', value: "value1"),
-              //       DropDownValueModel(name: 'جهاز ١', value: "value2"),
-              //       DropDownValueModel(name: 'جهاز ٢', value: "value3"),
-              //       DropDownValueModel(name: 'جهاز ٣', value: "value4"),
-              //     ],
-              //     onChanged: (val) {},
-              //   ),
-              //   // The validator receives the text that the user has entered.
-              // ),
-              const SizedBox(
-                height: 20,
-              ),
-              DropdownButton<String>(
-                value: dropdownValue,
-                icon: const Icon(Icons.arrow_drop_down),
-                elevation: 16,
-                style: const TextStyle(color: Color.fromARGB(255, 2, 1, 3)),
-                underline: Container(
-                  height: 2,
-                  color: Color.fromARGB(255, 7, 9, 32),
-                ),
-                onChanged: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                },
-                items: list.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(170, 10, 170, 10),
-                        child: Text(value,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
-                      ));
-                }).toList(),
-              ),
-
-              const SizedBox(
-                height: 20,
-              ),
-
-              //*
-              Text(
-                'اسم الجهاز',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(150, 0, 150, 0),
-                child: TextFormField(
-                  textAlign: TextAlign.right,
-
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    filled: true,
-                    hintStyle: TextStyle(color: Colors.grey[800]),
-                    hintText: " اسم الجهاز",
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const SizedBox(
+                    height: 35,
                   ),
-                  // The validator receives the text that the user has entered.
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return '  رجاء ادخل اسم الجهاز ';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              //submit button
-              Container(
-                  margin: EdgeInsets.all(30),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('تم اضافة الجهاز ')),
-                          );
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'إضافة جهاز',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 35),
+                    child: const Text(
+                      'الأجهزة المكتشفة',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ),
+
+                  // DropdownButton<String>(
+                  //   value: dropdownValue,
+                  //   icon: const Icon(Icons.arrow_drop_down),
+                  //   elevation: 16,
+                  //   style: const TextStyle(color: Color.fromARGB(255, 2, 1, 3)),
+                  //   underline: Container(
+                  //     height: 2,
+                  //     color: const Color.fromARGB(255, 7, 9, 32),
+                  //   ),
+                  //   onChanged: (String? value) {
+                  //     // This is called when the user selects an item.
+                  //     setState(() {
+                  //       dropdownValue = value!;
+                  //     });
+                  //   },
+                  //   items: list.map<DropdownMenuItem<String>>((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //         value: value,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.fromLTRB(170, 10, 170, 10),
+                  //           child: Text(value,
+                  //               style: const TextStyle(
+                  //                   fontWeight: FontWeight.bold, fontSize: 18)),
+                  //         ));
+                  //   }).toList(),
+                  // ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // DropdownButton(
+                  //     onChanged: (String? newValue) {
+                  //       print(newValue);
+                  //       setState(() {
+                  //         selectedValue = newValue!;
+                  //       });
+                  //       print(selectedValue);
+                  //     },
+                  //     value: selectedValue,
+                  //     items: dropdownItems),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 20, right: 20),
+                  //   child: DecoratedBox(
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.black38, width: 2),
+                  //         borderRadius: BorderRadius.circular(50),
+                  //       ),
+                  //       child: Padding(
+                  //           padding: const EdgeInsets.only(left: 60, right: 30),
+                  //           child: DropdownButton<String>(
+                  //             value: deviceController.text,
+                  //             items: const [
+                  //               DropdownMenuItem(
+                  //                 child: Text("خيار ١"),
+                  //                 value: "v1",
+                  //               ),
+                  //               DropdownMenuItem(
+                  //                   child: Text("خيار ٢"), value: "v2"),
+                  //               DropdownMenuItem(
+                  //                 child: Text("خيار ٣"),
+                  //                 value: "v3",
+                  //               )
+                  //             ],
+                  //             onChanged: (String? value) {
+                  //               print(value);
+                  //               // This is called when the user selects an item.
+                  //               setState(() {
+                  //                 deviceController.text = value!;
+                  //               });
+                  //               print(deviceController.text);
+                  //             },
+                  //             icon: const Padding(
+                  //                 padding: EdgeInsets.only(left: 20),
+                  //                 child: Icon(Icons.arrow_circle_down_sharp)),
+                  //             // iconEnabledColor: Colors.white, //Icon color
+                  //             style: const TextStyle(
+                  //                 //color: Color(bl),
+                  //                 fontSize: 20 //font size on dropdown button
+                  //                 ),
+
+                  //             //dropdown background color
+                  //             underline: Container(), //remove underline
+                  //             isExpanded: true, //make true to make width 100%
+                  //           ))),
+                  // ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 13.0, horizontal: 15),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) =>
+                            value == null ? "Select a country" : null,
+                        value: selectedValue,
+                        onChanged: (String? newValue) {
+                          print(newValue);
+                          setState(() {
+                            selectedValue = newValue!;
+                          });
+                          print(selectedValue);
+                        },
+                        items: dropdownItems),
+                  ),
+
+                  //*
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 35),
+                    child: Text(
+                      'اسم الجهاز',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 13.0, horizontal: 15),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[800]),
+                        hintText: " اسم الجهاز",
+                      ),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '  رجاء ادخل اسم الجهاز ';
                         }
+                        return null;
                       },
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(120, 15, 120, 15),
-                          child: Text(
-                            'أضف الجهاز',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
-                          )),
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 90,
+                  ),
+                  //submit button
+                  Container(
+                      padding: const EdgeInsets.only(left: 60.0, right: 60.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('تم اضافة الجهاز ')),
+                              );
+                            }
+                          },
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ))))),
-            ],
-          ),
-        ));
+                            borderRadius: BorderRadius.circular(50.0),
+                          ))),
+                          child: const Padding(
+                              padding: EdgeInsets.fromLTRB(90, 15, 90, 15),
+                              child: Text(
+                                'أضف الجهاز',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )))),
+                ],
+              ),
+            )));
   }
 }
