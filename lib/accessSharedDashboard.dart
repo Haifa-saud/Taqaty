@@ -4,21 +4,20 @@ import 'package:intl/intl.dart';
 
 import 'register.dart';
 
-class loginPage extends StatefulWidget {
-  const loginPage({
+class accsessShared extends StatefulWidget {
+  const accsessShared({
     Key? key,
   }) : super(key: key);
-  _loginPageState createState() => _loginPageState();
+  _accsessSharedState createState() => _accsessSharedState();
 }
 
-TextEditingController usernameController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
+TextEditingController codeController = TextEditingController();
+
 void clearForm() {
-  usernameController.text = '';
-  passwordController.text = '';
+  codeController.text = '';
 }
 
-class _loginPageState extends State<loginPage> {
+class _accsessSharedState extends State<accsessShared> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +25,7 @@ class _loginPageState extends State<loginPage> {
         backgroundColor: Color(0xFFFFFFFF),
         centerTitle: true,
         title: Text(
-          'تسجيل الدخول',
+          'لوحة المنزل المشتركة',
           style: TextStyle(color: Colors.black87),
         ),
         leading: //Icon(Icons.more_vert)
@@ -75,7 +74,7 @@ class loginFormState extends State<loginForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 15),
+        padding: const EdgeInsets.all(15),
         child: ListView(children: <Widget>[
           Image.asset(
             'assets/images/logo.jpg',
@@ -83,13 +82,26 @@ class loginFormState extends State<loginForm> {
             width: 200,
           ),
           Container(
+              padding: const EdgeInsets.fromLTRB(6, 12, 0, 0),
+              child: TextFormField(
+                //     style: TextStyle(color: Colors.black),
+                // maxLength: 20,
+                readOnly: true,
+                textAlign: TextAlign.right,
+                decoration: const InputDecoration(
+                  hintText: 'رمز لوحة المعلومات ',
+                  contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  border: InputBorder.none,
+                ),
+              )),
+          Container(
               padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
               child: TextFormField(
                 // maxLength: 20,
                 textAlign: TextAlign.right,
                 controller: usernameController,
                 decoration: InputDecoration(
-                  hintText: 'اسم المستخدم',
+                  hintText: 'الرمز',
                   contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100.0),
@@ -105,55 +117,6 @@ class loginFormState extends State<loginForm> {
                       borderRadius: BorderRadius.circular(100.0),
                       borderSide:
                           const BorderSide(color: Colors.red, width: 2.0)),
-                ),
-                validator: (value) {
-                  if (value == null ||
-                      value.isEmpty ||
-                      (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
-                  }
-                  return null;
-                },
-              )),
-          Container(
-              padding: EdgeInsets.fromLTRB(6, 12, 6, 12),
-              child: TextFormField(
-                textAlign: TextAlign.right,
-                maxLength: 8,
-                controller: passwordController,
-                obscureText: !_passwordVisible,
-                decoration: InputDecoration(
-                  hintText: ' كلمة السر',
-                  contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                      borderSide: BorderSide(color: Colors.grey.shade400)),
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                      borderSide:
-                          const BorderSide(color: Colors.red, width: 2.0)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                      borderSide:
-                          const BorderSide(color: Colors.red, width: 2.0)),
-                  prefixIcon: IconButton(
-                    icon: Icon(
-                      // Based on passwordVisible state choose the icon
-                      _passwordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Color.fromRGBO(53, 152, 219, 1),
-                    ),
-                    onPressed: () {
-                      // Update the state i.e. toogle the state of passwordVisible variable
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
-                    },
-                  ),
                 ),
                 validator: (value) {
                   if (value == null ||
@@ -182,33 +145,11 @@ class loginFormState extends State<loginForm> {
                     backgroundColor: Colors.green),
               );
             },
-            child: Text('تسجيل الدخول'),
+            child: Text('تحقق من الرمز'),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
-            ),
-          )),
-
-          Center(
-              child: RichText(
-            text: TextSpan(
-              style: defaultStyle,
-              children: <TextSpan>[
-                TextSpan(text: ' ليس لديك حساب؟ '),
-                TextSpan(
-                    text: 'تسجيل جديد',
-                    style: linkStyle,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        clearForm();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => register(),
-                            ));
-                      }),
-              ],
             ),
           )),
         ]),

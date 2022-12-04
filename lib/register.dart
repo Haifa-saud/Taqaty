@@ -16,20 +16,35 @@ TextEditingController fullNameController = TextEditingController();
 TextEditingController DOBController = TextEditingController();
 TextEditingController PhoneNumController = TextEditingController();
 
+void clearForm() {
+  usernameController.text = '';
+  passwordController.text = '';
+  fullNameController.text = '';
+  DOBController.text = '';
+  PhoneNumController.text = '';
+}
+
 class _registerState extends State<register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFFFFFFF),
         centerTitle: true,
-        title: Text('تسجيل جديد'),
+        title: Text(
+          'تسجيل جديد',
+          style: TextStyle(color: Colors.black87),
+        ),
         leading: //Icon(Icons.more_vert)
             Text(''),
         actions: [
           IconButton(
-            icon: const Icon(Icons.arrow_forward_ios),
+            icon: const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.black87,
+            ),
             onPressed: () {
+              clearForm();
               Navigator.of(context).pop();
               setState(() {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -39,7 +54,7 @@ class _registerState extends State<register> {
             },
           ),
         ],
-        elevation: 15,
+        // elevation: 15,
       ),
       body: registerForm(),
     );
@@ -96,7 +111,7 @@ class registerFormState extends State<registerForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 15),
         child: ListView(children: <Widget>[
           Image.asset(
             'assets/images/logo.jpg',
@@ -131,7 +146,7 @@ class registerFormState extends State<registerForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال اسم المستخدم';
                   }
                   return null;
                 },
@@ -166,7 +181,7 @@ class registerFormState extends State<registerForm> {
                       _passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: Theme.of(context).primaryColorDark,
+                      color: Color.fromRGBO(53, 152, 219, 1),
                     ),
                     onPressed: () {
                       // Update the state i.e. toogle the state of passwordVisible variable
@@ -180,7 +195,7 @@ class registerFormState extends State<registerForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال كلمة السر';
                   }
                   return null;
                 },
@@ -213,7 +228,7 @@ class registerFormState extends State<registerForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال الاسم الكامل';
                   }
                   return null;
                 },
@@ -250,7 +265,7 @@ class registerFormState extends State<registerForm> {
                 prefixIcon: IconButton(
                   icon: Icon(
                     Icons.calendar_today,
-                    color: Theme.of(context).primaryColorDark,
+                    color: Color.fromRGBO(53, 152, 219, 1),
                   ),
                   onPressed: () {
                     // Update the state i.e. toogle the state of passwordVisible variable
@@ -259,7 +274,7 @@ class registerFormState extends State<registerForm> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty || (value.trim()).isEmpty) {
-                  return 'Please select a date of birth';
+                  return 'الرجاء اختيار تاريخ الميلاد';
                 }
               },
             ),
@@ -290,7 +305,7 @@ class registerFormState extends State<registerForm> {
                   prefixIcon: IconButton(
                     icon: Icon(
                       Icons.phone_android,
-                      color: Theme.of(context).primaryColorDark,
+                      color: Color.fromRGBO(53, 152, 219, 1),
                     ),
                     onPressed: () {
                       // Update the state i.e. toogle the state of passwordVisible variable
@@ -301,7 +316,7 @@ class registerFormState extends State<registerForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال كلمة السر';
                   }
                   return null;
                 },
@@ -329,8 +344,8 @@ class registerFormState extends State<registerForm> {
               ),
             ),
           )),
-
-          RichText(
+          Center(
+              child: RichText(
             text: TextSpan(
               style: defaultStyle,
               children: <TextSpan>[
@@ -348,7 +363,7 @@ class registerFormState extends State<registerForm> {
                       }),
               ],
             ),
-          ),
+          )),
         ]),
       ),
     );

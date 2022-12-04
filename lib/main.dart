@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hackathon/login.dart';
 import 'package:hackathon/register.dart';
 
+import 'accessSharedDashboard.dart';
+import 'houseDevicesList.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,6 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: new ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          fontFamily: 'LamaSans',
+          textTheme: TextTheme()),
       title: 'Flutter Demo',
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -29,12 +36,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => register(),
+                          builder: (context) => accsessShared(),
                         ));
                   },
                   child: Text('لوحة المنزل المشتركة'),
@@ -112,14 +113,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ))),
+            Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                child: Container(
+                    child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => devicesList(),
+                        ));
+                  },
+                  child: Text('قائمة الاجهزة'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ))),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
