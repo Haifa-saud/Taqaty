@@ -274,22 +274,44 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
       onItemSelected: (index) => setState(() => this.index = index),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-            icon: const Icon(Icons.holiday_village_rounded),
-            title: const Text(
-              'منازلي',
-              textAlign: TextAlign.center,
-            ),
-            activeColor: Colors.lightBlue),
-        BottomNavyBarItem(
           icon: const Icon(Icons.person_outline_rounded),
           title: const Text(
             'الملف الشخصي',
             textAlign: TextAlign.center,
           ),
           activeColor: Colors.lightBlue,
-        )
+        ),
+        BottomNavyBarItem(
+            icon: const Icon(Icons.holiday_village_rounded),
+            title: const Text(
+              'منازلي',
+              textAlign: TextAlign.center,
+            ),
+            activeColor: Colors.lightBlue),
       ],
       mainAxisAlignment: MainAxisAlignment.spaceAround,
     );
+  }
+
+  navigateRoutes() {
+    switch (index) {
+      case 0:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListOfHouseAccounts()),
+          );
+          break;
+        }
+      case 1:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+          );
+          break;
+        }
+    }
   }
 }

@@ -142,6 +142,7 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
             //             color: Color.fromARGB(255, 106, 105, 105)),
             //       ),
             //     ]))
+
             Container(
                 padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
                 child: TextFormField(
@@ -255,6 +256,7 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
       //     )
       //   ],
       // ),
+
       bottomNavigationBar: buildBottomNavigation(),
     );
   }
@@ -268,22 +270,44 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
       ),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-            icon: const Icon(Icons.holiday_village_rounded),
-            title: const Text(
-              'منازلي',
-              textAlign: TextAlign.center,
-            ),
-            activeColor: Colors.lightBlue),
-        BottomNavyBarItem(
           icon: const Icon(Icons.person_outline_rounded),
           title: const Text(
             'الملف الشخصي',
             textAlign: TextAlign.center,
           ),
           activeColor: Colors.lightBlue,
-        )
+        ),
+        BottomNavyBarItem(
+            icon: const Icon(Icons.holiday_village_rounded),
+            title: const Text(
+              'منازلي',
+              textAlign: TextAlign.center,
+            ),
+            activeColor: Colors.lightBlue),
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
     );
+  }
+
+  navigateRoutes() {
+    switch (index) {
+      case 0:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListOfHouseAccounts()),
+          );
+          break;
+        }
+      case 1:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+          );
+          break;
+        }
+    }
   }
 }
