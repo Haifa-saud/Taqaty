@@ -1,4 +1,4 @@
-# flutter_application_1
+# hackathon
 
 A new Flutter project.
 
