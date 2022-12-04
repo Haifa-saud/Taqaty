@@ -30,10 +30,10 @@ class _registerState extends State<register> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFFFFFFF),
+        foregroundColor: Colors.black87,
         centerTitle: true,
         title: Text(
           'تسجيل جديد',
-          style: TextStyle(color: Colors.black87),
         ),
         leading: //Icon(Icons.more_vert)
             Text(''),
@@ -41,7 +41,6 @@ class _registerState extends State<register> {
           IconButton(
             icon: const Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black87,
             ),
             onPressed: () {
               clearForm();

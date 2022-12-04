@@ -18,18 +18,37 @@ class _devicesListState extends State<devicesList> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFFFFFFF),
+          foregroundColor: Colors.black87,
           centerTitle: true,
           title: Text(
             'البيت',
-            style: TextStyle(color: Colors.black87),
           ),
           leading: //Icon(Icons.more_vert)
-              Text(''),
+              PopupMenuButton(
+            onSelected: (value) {
+              // your logic
+            },
+            itemBuilder: (BuildContext bc) {
+              return const [
+                PopupMenuItem(
+                  child: Text("خيار ١"),
+                  value: '/hello',
+                ),
+                PopupMenuItem(
+                  child: Text("خيار ٢"),
+                  value: '/about',
+                ),
+                PopupMenuItem(
+                  child: Text("خيار ٣"),
+                  value: '/contact',
+                )
+              ];
+            },
+          ),
           actions: [
             IconButton(
               icon: const Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.black87,
               ),
               onPressed: () {
                 clearForm();
@@ -62,7 +81,7 @@ class _devicesListState extends State<devicesList> {
                 )),
             Expanded(
               child: loginForm(),
-            )
+            ),
           ],
         )
         // loginForm(),
@@ -112,8 +131,8 @@ class loginFormState extends State<loginForm> {
                     boxShadow: <BoxShadow>[
                       BoxShadow(
                         color: Colors.grey,
-                        offset: Offset(1.0, 15.0),
-                        blurRadius: 20.0,
+                        offset: Offset(0, 7.0),
+                        blurRadius: 7.0,
                       ),
                     ],
                   ),

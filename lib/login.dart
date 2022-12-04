@@ -24,10 +24,10 @@ class _loginPageState extends State<loginPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFFFFFFF),
+        foregroundColor: Colors.black87,
         centerTitle: true,
         title: Text(
           'تسجيل الدخول',
-          style: TextStyle(color: Colors.black87),
         ),
         leading: //Icon(Icons.more_vert)
             Text(''),
@@ -35,7 +35,6 @@ class _loginPageState extends State<loginPage> {
           IconButton(
             icon: const Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black87,
             ),
             onPressed: () {
               clearForm();

@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'register.dart';
 
 class accsessShared extends StatefulWidget {
@@ -23,10 +23,10 @@ class _accsessSharedState extends State<accsessShared> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFFFFFFF),
+        foregroundColor: Colors.black87,
         centerTitle: true,
         title: Text(
           'لوحة المنزل المشتركة',
-          style: TextStyle(color: Colors.black87),
         ),
         leading: //Icon(Icons.more_vert)
             Text(''),
@@ -34,7 +34,6 @@ class _accsessSharedState extends State<accsessShared> {
           IconButton(
             icon: const Icon(
               Icons.arrow_forward_ios,
-              color: Colors.black87,
             ),
             onPressed: () {
               clearForm();
@@ -69,8 +68,18 @@ class loginFormState extends State<loginForm> {
   ScrollController _scrollController = ScrollController();
 
   Widget build(BuildContext context) {
-    TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 20.0);
-    TextStyle linkStyle = TextStyle(color: Colors.blue);
+    final List<ChartData> chartData = [
+      ChartData('الثلاجة', 35),
+      ChartData('المكيف', 23),
+      ChartData('التلفاز', 34),
+      ChartData('المايكرويف', 25),
+      ChartData('الفريزر', 40)
+    ];
+    // ChartData('الثلاجة', 35),
+    //   ChartData( 'المكيف', 23),
+    //   ChartData('التلفاز', 34),
+    //   ChartData('المايكرويف', 25),
+    //   ChartData('الفريزر', 40)
     return Form(
       key: _formKey,
       child: Padding(
@@ -152,8 +161,27 @@ class loginFormState extends State<loginForm> {
               ),
             ),
           )),
+          SfCartesianChart(
+              primaryXAxis: CategoryAxis(),
+              //  primaryYAxis: NumericAxis(
+              // numberFormat: NumberFormat.percentPattern()),
+              series: <ChartSeries<ChartData, String>>[
+                // Renders column chart
+                ColumnSeries<ChartData, String>(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    dataSource: chartData,
+                    dataLabelSettings: DataLabelSettings(isVisible: true),
+                    xValueMapper: (ChartData data, _) => data.x,
+                    yValueMapper: (ChartData data, _) => data.y),
+              ]),
         ]),
       ),
     );
   }
+}
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final String x;
+  final double y;
 }
