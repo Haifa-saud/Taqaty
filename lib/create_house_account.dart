@@ -1,7 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/list_of_house_accounts.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class CreateHouseAccount extends StatefulWidget {
   const CreateHouseAccount({super.key});
@@ -282,12 +281,13 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
           activeColor: Colors.lightBlue,
         ),
         BottomNavyBarItem(
-            icon: const Icon(Icons.holiday_village_rounded),
-            title: const Text(
-              'منازلي',
-              textAlign: TextAlign.center,
-            ),
-            activeColor: Colors.lightBlue),
+          icon: const Icon(Icons.holiday_village_rounded),
+          title: const Text(
+            'منازلي',
+            textAlign: TextAlign.center,
+          ),
+          activeColor: Colors.lightBlue,
+        ),
       ],
       mainAxisAlignment: MainAxisAlignment.spaceAround,
     );

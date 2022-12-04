@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/dashboard.dart';
 
 import 'create_house_account.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const CreateHouseAccount(),
+      home: const dashboard(),
     );
   }
 }
