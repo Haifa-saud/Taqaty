@@ -1,7 +1,9 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/list_of_house_accounts.dart';
+import 'package:hackathon/profile.dart';
+
+import 'list_of_house_accounts.dart';
 
 class CreateHouseAccount extends StatefulWidget {
   const CreateHouseAccount({super.key});
@@ -26,143 +28,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        leading: //Icon(Icons.more_vert)
-            PopupMenuButton(
-          onSelected: (value) {
-            if (value == 'share') {
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: const Text(
-                    "مشاركة لوحة المعلومات",
-                    textAlign: TextAlign.left,
-                  ),
-                  content: const Text(
-                    'رجاء ادخل رقم جوال لمشاركة لوحة المعلومات',
-                    textAlign: TextAlign.left,
-                  ),
-                  actions: <Widget>[
-                    TextFormField(
-                      textAlign: TextAlign.right,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 13.0, horizontal: 15),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        filled: true,
-                        hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: " رقم الهاتف",
-                      ),
-                      // The validator receives the text that the user has entered.
-                      validator: (value) {
-                        phone.text = value!;
-                        if (value == null || value.isEmpty) {
-                          return '  رجاء ادخل رقم هاتف';
-                        }
-                        if (value.length < 10) {
-                          return '  رجاء ادخل رقم هاتف صحيح';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Container(
-                            //padding: const EdgeInsets.all(14),
-                            child: const Text("الغاء"),
-                          ),
-                        ),
-                        //log in ok button
-                        TextButton(
-                          onPressed: () {
-                            if (phone.text.isEmpty) {}
-                            // pop out
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Container(
-                            //padding: const EdgeInsets.all(14),
-                            child: const Text("مشاركة",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 35, 129, 6))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const Share()),
-              // );
-            }
-            if (value == 'delete') {
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: const Text(
-                    "حذف المنزل",
-                    textAlign: TextAlign.left,
-                  ),
-                  content: const Text(
-                    "هل أنت متأكد من حذف حساب المنزل ؟",
-                    textAlign: TextAlign.left,
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        child: const Text("الغاء"),
-                      ),
-                    ),
-                    //log in ok button
-                    TextButton(
-                      onPressed: () {
-                        // pop out
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        child: const Text("حذف",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 164, 10, 10))),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-            // your logic
-          },
-          itemBuilder: (BuildContext bc) {
-            return const [
-              PopupMenuItem(
-                child: Text("مشاركة لوحة المعلومات "),
-                value: 'share',
-              ),
-              PopupMenuItem(
-                child: Text("حذف حساب المنرل",
-                    style: TextStyle(color: Color.fromARGB(255, 167, 32, 32))),
-                value: 'delete',
-              ),
-            ];
-          },
-        ),
+        leading: Text(''),
         actions: [
           IconButton(
             icon: const Icon(Icons.arrow_forward_ios),
@@ -197,6 +63,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                     children: <Widget>[
                       const Text('*اسم المنزل', textAlign: TextAlign.right),
                       TextFormField(
+                        controller: name,
                         maxLength: 20,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
@@ -363,20 +230,20 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                             backgroundColor: Colors.redAccent),
                       );
                     } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                              '  تم اضافة المنزل بنجاح',
+                              textAlign: TextAlign.center,
+                            ),
+                            backgroundColor: Colors.green),
+                      );
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const ListOfHouseAccounts(),
                           ));
                     }
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text(
-                            '  تم اضافة المنزل بنجاح',
-                            textAlign: TextAlign.center,
-                          ),
-                          backgroundColor: Colors.green),
-                    );
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -436,6 +303,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
   }
 
   //int index = 0;
+  int index = 0;
   Widget buildBottomNavigation() {
     return BottomNavyBar(
       selectedIndex: global.index,
@@ -446,7 +314,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
         if (global.index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+            MaterialPageRoute(builder: (context) => const profile()),
           );
         } else if (global.index == 1) {
           Navigator.push(
@@ -526,5 +394,5 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
 }
 
 class global {
-  static var index = 0;
+  static var index = 1;
 }

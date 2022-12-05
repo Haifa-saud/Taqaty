@@ -1,8 +1,9 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/dashboard.dart';
+import 'package:hackathon/profile.dart';
 
 import 'create_house_account.dart';
+import 'dashboard.dart';
 
 class ListOfHouseAccounts extends StatefulWidget {
   const ListOfHouseAccounts({super.key});
@@ -13,6 +14,7 @@ class ListOfHouseAccounts extends StatefulWidget {
 
 class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
   int selectedIndex = 0;
+
   late PageController pageController;
 
   @override
@@ -48,12 +50,13 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
                 padding: const EdgeInsets.fromLTRB(6, 12, 0, 12),
                 child: TextFormField(
                   // maxLength: 20,
+
                   readOnly: true,
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
                     hintText: 'قائمة منازلي',
                     contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    border: InputBorder.none,
+                    //border: InputBorder.none,
                     prefixIcon: IconButton(
                       icon: const Icon(
                           // Based on passwordVisible state choose the icon
@@ -317,7 +320,7 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
         if (global.index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+            MaterialPageRoute(builder: (context) => const profile()),
           );
         } else if (global.index == 1) {
           Navigator.push(

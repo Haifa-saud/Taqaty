@@ -4,10 +4,13 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter_application_1/create_house_account.dart';
+import 'package:hackathon/profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import 'create_house_account.dart';
+import 'goal.dart';
+import 'houseDevicesList.dart';
 import 'list_of_house_accounts.dart';
 
 class dashboard extends StatefulWidget {
@@ -21,17 +24,17 @@ class _dashboardState extends State<dashboard> {
   @override
   List text = [
     [
-      'فاتورة الكهرباء\n500.25 SR',
+      'فاتورة الكهرباء\n\n500.25 SR',
       '500.25 SR',
       '\t',
-      Color.fromARGB(255, 88, 196, 247),
+      Color.fromARGB(255, 92, 226, 233),
       Colors.black
     ],
     [
-      'اجمالي استهلاك الطاقة\n150 kWh\n  تم بلوغ 50% من هدف الشهر',
+      'اجمالي استهلاك الطاقة\n\n150 kWh\n\n  تم بلوغ 50% من هدف الشهر',
       '150 kWh',
       'تم بلوغ 50% من هدف الشهر',
-      Colors.lightBlue,
+      Color.fromARGB(255, 107, 217, 245),
       Colors.white
     ]
   ];
@@ -224,7 +227,7 @@ class _dashboardState extends State<dashboard> {
                     ),
                   ])),
               Container(
-                  padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),
+                  padding: const EdgeInsets.fromLTRB(6, 12, 6, 0),
                   child: Material(
                       elevation: 20,
                       borderRadius: BorderRadius.circular(30),
@@ -233,13 +236,21 @@ class _dashboardState extends State<dashboard> {
                         maxLines: 4,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
-                          hintText: 'الهدف لإجمالي استهلاك \n :الطاقة',
+                          suffixIcon: const Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Text(
+                                'الهدف لإجمالي استهلاك \n :الطاقة',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(fontSize: 17),
+                              )),
                           hintStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
+                            fontSize: 10,
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromARGB(255, 17, 184, 97),
+                          ),
                           contentPadding:
-                              const EdgeInsets.fromLTRB(20, 10, 5, 10),
+                              const EdgeInsets.fromLTRB(20, 15, 5, 10),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
                               borderSide: const BorderSide(color: Colors.grey)),
@@ -255,13 +266,36 @@ class _dashboardState extends State<dashboard> {
                               borderRadius: BorderRadius.circular(30.0),
                               borderSide: const BorderSide(
                                   color: Colors.red, width: 2.0)),
-                          prefixIcon: const Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Text(
-                                '300 kWh',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                          prefixIcon: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, top: 8, right: 0),
+                              child: InkWell(
+                                child: const Text(
+                                  '300 kWh',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.green),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Goal()),
+                                  );
+                                },
                               )),
+
+                          //const Padding(
+                          //     padding: EdgeInsets.all(15),
+                          //     child: Text(
+                          //       '300 kWh',
+                          //       style: TextStyle(
+                          //           fontSize: 20,
+                          //           fontWeight: FontWeight.w500),
+
+                          // )),
+                          //InkWell(hintText: 'حدد هدف الشهر')
                         ),
                       ))),
               Expanded(
@@ -291,7 +325,7 @@ class _dashboardState extends State<dashboard> {
                           maxLines: 6,
                           textAlign: TextAlign.right,
                           decoration: InputDecoration(
-                            hintText: 'استهلاك الطاقة لكل جهاز',
+                            labelText: 'استهلاك الطاقة لكل جهاز',
                             hintStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -324,8 +358,10 @@ class _dashboardState extends State<dashboard> {
                                   series: <ChartSeries<ChartData, String>>[
                                     // Renders column chart
                                     ColumnSeries<ChartData, String>(
+                                        color:
+                                            Color.fromARGB(255, 98, 227, 165),
                                         borderRadius: const BorderRadius.all(
-                                            Radius.circular(20)),
+                                            Radius.circular(10)),
                                         dataSource: chartData,
                                         dataLabelSettings:
                                             DataLabelSettings(isVisible: true),
@@ -347,7 +383,6 @@ class _dashboardState extends State<dashboard> {
   }
 
   int index = 0;
-
   Widget buildBottomNavigation() {
     return BottomNavyBar(
       selectedIndex: global.index,
@@ -358,9 +393,14 @@ class _dashboardState extends State<dashboard> {
         if (global.index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+            MaterialPageRoute(builder: (context) => const devicesList()),
           );
         } else if (global.index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const dashboard()),
+          );
+        } else if (global.index == 2) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -370,7 +410,7 @@ class _dashboardState extends State<dashboard> {
       },
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-          icon: const Icon(Icons.person_outline_rounded),
+          icon: const Icon(Icons.electrical_services_rounded),
           // icon: IconButton(
           //     icon: const Icon(Icons.person_outline_rounded),
           //     onPressed: () {
@@ -384,11 +424,31 @@ class _dashboardState extends State<dashboard> {
           //       );
           //     }),
           title: const Text(
-            'الملف الشخصي',
+            ' اجهزتي',
             textAlign: TextAlign.center,
           ),
           activeColor: Colors.lightBlue,
         ),
+        BottomNavyBarItem(
+            icon: const Icon(Icons.auto_graph_outlined),
+            // icon: IconButton(
+            //     icon: const Icon(Icons.holiday_village_rounded),
+            //     onPressed: () {
+
+            //       setState(
+            //         () => this.index = index,
+            //       );
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => const ListOfHouseAccounts()),
+            //       );
+            //     }),
+            title: const Text(
+              'لوحة المعلومات',
+              textAlign: TextAlign.center,
+            ),
+            activeColor: Colors.lightBlue),
         BottomNavyBarItem(
             icon: const Icon(Icons.holiday_village_rounded),
             // icon: IconButton(
