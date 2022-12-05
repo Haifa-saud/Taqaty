@@ -276,13 +276,19 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
           ),
           activeColor: Colors.lightBlue,
         ),
-        BottomNavyBarItem(
-            icon: const Icon(Icons.holiday_village_rounded),
-            title: const Text(
-              'منازلي',
-              textAlign: TextAlign.center,
-            ),
-            activeColor: Colors.lightBlue),
+        // BottomNavyBarItem(
+        //     icon: InkWell(onTap: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => const ListOfHouseAccounts()),
+        //       );
+        //     }, Icon(Icons.holiday_village_rounded)),
+        //     title: const Text(
+        //       'منازلي',
+        //       textAlign: TextAlign.center,
+        //     ),
+        //     activeColor: Colors.lightBlue),
       ],
       mainAxisAlignment: MainAxisAlignment.spaceAround,
     );

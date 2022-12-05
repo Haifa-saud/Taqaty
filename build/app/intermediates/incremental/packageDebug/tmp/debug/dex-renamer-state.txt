@@ -1,4 +1,4 @@
-#Sun Dec 04 21:19:09 AST 2022
+#Mon Dec 05 15:48:52 AST 2022
 base.0=/Users/haifasaud/Documents/GitHub/Taqaty/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
