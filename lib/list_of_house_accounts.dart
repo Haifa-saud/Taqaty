@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/dashboard.dart';
 
 import 'create_house_account.dart';
 
@@ -176,7 +177,18 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
                         borderRadius: BorderRadius.circular(100.0),
                         borderSide:
                             const BorderSide(color: Colors.red, width: 2.0)),
-                    prefixIcon: const Icon(Icons.arrow_back_ios),
+                    prefixIcon: IconButton(
+                      icon: const Icon(
+                          // Based on passwordVisible state choose the icon
+                          Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const dashboard()),
+                        );
+                      },
+                    ),
                   ),
                 )),
             Container(
@@ -202,7 +214,18 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
                         borderRadius: BorderRadius.circular(100.0),
                         borderSide:
                             const BorderSide(color: Colors.red, width: 2.0)),
-                    prefixIcon: const Icon(Icons.arrow_back_ios),
+                    prefixIcon: IconButton(
+                      icon: const Icon(
+                          // Based on passwordVisible state choose the icon
+                          Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const dashboard()),
+                        );
+                      },
+                    ),
                   ),
                 )),
             Container(
@@ -212,23 +235,35 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
                   readOnly: true,
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
-                      hintText: 'الاستراحة',
-                      contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide: const BorderSide(color: Colors.grey)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.grey.shade400)),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide:
-                              const BorderSide(color: Colors.red, width: 2.0)),
-                      focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide:
-                              const BorderSide(color: Colors.red, width: 2.0)),
-                      prefixIcon: const Icon(Icons.arrow_back_ios)),
+                    hintText: 'الاستراحة',
+                    contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                        borderSide: const BorderSide(color: Colors.grey)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                        borderSide: BorderSide(color: Colors.grey.shade400)),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 2.0)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 2.0)),
+                    prefixIcon: IconButton(
+                      icon: const Icon(
+                          // Based on passwordVisible state choose the icon
+                          Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const dashboard()),
+                        );
+                      },
+                    ),
+                  ),
                 )),
           ],
         ),
