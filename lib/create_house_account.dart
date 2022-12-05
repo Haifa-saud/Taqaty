@@ -12,6 +12,8 @@ class CreateHouseAccount extends StatefulWidget {
 
 class _CreateHouseAccountState extends State<CreateHouseAccount> {
   TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var role = 'viewer';
@@ -59,6 +61,7 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                       ),
                       // The validator receives the text that the user has entered.
                       validator: (value) {
+                        phone.text = value!;
                         if (value == null || value.isEmpty) {
                           return '  رجاء ادخل رقم هاتف';
                         }
@@ -68,26 +71,35 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
                         return null;
                       },
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        child: const Text("الغاء"),
-                      ),
+                    SizedBox(
+                      height: 10,
                     ),
-                    //log in ok button
-                    TextButton(
-                      onPressed: () {
-                        // pop out
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        child: const Text("مشاركة",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 35, 129, 6))),
-                      ),
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                          },
+                          child: Container(
+                            //padding: const EdgeInsets.all(14),
+                            child: const Text("الغاء"),
+                          ),
+                        ),
+                        //log in ok button
+                        TextButton(
+                          onPressed: () {
+                            if (phone.text.isEmpty) {}
+                            // pop out
+                            Navigator.of(ctx).pop();
+                          },
+                          child: Container(
+                            //padding: const EdgeInsets.all(14),
+                            child: const Text("مشاركة",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 35, 129, 6))),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
