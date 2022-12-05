@@ -69,11 +69,11 @@ class loginFormState extends State<loginForm> {
 
   Widget build(BuildContext context) {
     final List<ChartData> chartData = [
-      ChartData('الثلاجة', 35),
-      ChartData('المكيف', 23),
-      ChartData('التلفاز', 34),
-      ChartData('المايكرويف', 25),
-      ChartData('الفريزر', 40)
+      ChartData('الثلاجة', 350),
+      ChartData('المكيف', 230),
+      ChartData('التلفاز', 340),
+      ChartData('المايكرويف', 250),
+      ChartData('الفريزر', 400)
     ];
     // ChartData('الثلاجة', 35),
     //   ChartData( 'المكيف', 23),
@@ -162,9 +162,8 @@ class loginFormState extends State<loginForm> {
             ),
           )),
           SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              //  primaryYAxis: NumericAxis(
-              // numberFormat: NumberFormat.percentPattern()),
+              primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Devices')),
+              primaryYAxis: NumericAxis(title: AxisTitle(text: 'kWh')),
               series: <ChartSeries<ChartData, String>>[
                 // Renders column chart
                 ColumnSeries<ChartData, String>(

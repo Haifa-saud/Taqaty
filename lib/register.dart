@@ -112,10 +112,16 @@ class registerFormState extends State<registerForm> {
       child: Padding(
         padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 15),
         child: ListView(children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
           Image.asset(
             'assets/images/logo.jpg',
-            height: 200,
-            width: 200,
+            height: 100,
+            width: 100,
+          ),
+          SizedBox(
+            height: 20,
           ),
           Container(
               padding: const EdgeInsets.fromLTRB(6, 12, 6, 12),

@@ -74,7 +74,8 @@ class loginFormState extends State<loginForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 15),
+        padding:
+            const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 15),
         child: ListView(children: <Widget>[
           Image.asset(
             'assets/images/logo.jpg',
