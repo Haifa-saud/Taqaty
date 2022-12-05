@@ -37,14 +37,83 @@ class add_deviceState extends State<add_device> {
     String selectedValue = "LG TV";
     String deviceChoice = '';
     return Scaffold(
-      //backgroundColor: Color.fromARGB(255, 44, 97, 85),
+        //backgroundColor: Color.fromARGB(255, 44, 97, 85),
         appBar: AppBar(
+          title: const Text(
+            'البيت',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
           centerTitle: true,
-          title: const Text('البيت'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
           leading: //Icon(Icons.more_vert)
               PopupMenuButton(
             onSelected: (value) {
               if (value == 'share') {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text(
+                      "مشاركة لوحة المعلومات",
+                      textAlign: TextAlign.left,
+                    ),
+                    content: const Text(
+                      'رجاء ادخل رقم جوال لمشاركة لوحة المعلومات',
+                      textAlign: TextAlign.left,
+                    ),
+                    actions: <Widget>[
+                      TextFormField(
+                        textAlign: TextAlign.right,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 13.0, horizontal: 15),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          filled: true,
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: " رقم الهاتف",
+                        ),
+                        // The validator receives the text that the user has entered.
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '  رجاء ادخل رقم هاتف';
+                          }
+                          if (value.length < 10) {
+                            return '  رجاء ادخل رقم هاتف صحيح';
+                          }
+                          return null;
+                        },
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("الغاء"),
+                        ),
+                      ),
+                      //log in ok button
+                      TextButton(
+                        onPressed: () {
+                          // pop out
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("مشاركة",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 35, 129, 6))),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Share()),
@@ -78,7 +147,6 @@ class add_deviceState extends State<add_device> {
                           // pop out
                         },
                         child: Container(
-                          
                           padding: const EdgeInsets.all(14),
                           child: const Text("حذف",
                               style: TextStyle(
