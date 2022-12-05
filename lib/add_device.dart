@@ -37,6 +37,7 @@ class add_deviceState extends State<add_device> {
     String selectedValue = "LG TV";
     String deviceChoice = '';
     return Scaffold(
+      //backgroundColor: Color.fromARGB(255, 44, 97, 85),
         appBar: AppBar(
           centerTitle: true,
           title: const Text('البيت'),

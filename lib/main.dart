@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacathon/profile.dart';
 
 import 'Goal.dart';
 import 'add_device.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: add_device(),
+      home: Share(),
     );
   }
 }
