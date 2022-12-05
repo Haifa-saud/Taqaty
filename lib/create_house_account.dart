@@ -1,6 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/list_of_house_accounts.dart';
+import 'globals.dart' as globals;
 
 class CreateHouseAccount extends StatefulWidget {
   const CreateHouseAccount({super.key});
@@ -266,14 +267,42 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
     );
   }
 
-  int index = 0;
+  //int index = 0;
   Widget buildBottomNavigation() {
     return BottomNavyBar(
-      selectedIndex: index,
-      onItemSelected: (index) => setState(() => this.index = index),
+      selectedIndex: global.index,
+      onItemSelected: (index) {
+        setState(
+          () => global.index = index,
+        );
+        if (global.index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+          );
+        } else if (global.index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListOfHouseAccounts()),
+          );
+        }
+      },
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
           icon: const Icon(Icons.person_outline_rounded),
+          // icon: IconButton(
+          //     icon: const Icon(Icons.person_outline_rounded),
+          //     onPressed: () {
+          //       setState(
+          //         () => this.index = index,
+          //       );
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => const CreateHouseAccount()),
+          //       );
+          //     }),
           title: const Text(
             'الملف الشخصي',
             textAlign: TextAlign.center,
@@ -281,20 +310,32 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
           activeColor: Colors.lightBlue,
         ),
         BottomNavyBarItem(
-          icon: const Icon(Icons.holiday_village_rounded),
-          title: const Text(
-            'منازلي',
-            textAlign: TextAlign.center,
-          ),
-          activeColor: Colors.lightBlue,
-        ),
+            icon: const Icon(Icons.holiday_village_rounded),
+            // icon: IconButton(
+            //     icon: const Icon(Icons.holiday_village_rounded),
+            //     onPressed: () {
+
+            //       setState(
+            //         () => this.index = index,
+            //       );
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => const ListOfHouseAccounts()),
+            //       );
+            //     }),
+            title: const Text(
+              'منازلي',
+              textAlign: TextAlign.center,
+            ),
+            activeColor: Colors.lightBlue),
       ],
       mainAxisAlignment: MainAxisAlignment.spaceAround,
     );
   }
 
   navigateRoutes() {
-    switch (index) {
+    switch (global.index) {
       case 0:
         {
           Navigator.push(
@@ -314,4 +355,8 @@ class _CreateHouseAccountState extends State<CreateHouseAccount> {
         }
     }
   }
+}
+
+class global {
+  static var index = 0;
 }

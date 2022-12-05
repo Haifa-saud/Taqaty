@@ -24,12 +24,12 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(mainAxisAlignment: MainAxisAlignment.start, children: const [
-          Text(
-            '!مرحبًا هيفاء',
-            textAlign: TextAlign.right,
-          ),
-        ]),
+        title: const Text(
+          '!مرحبًا هيفاء',
+          textAlign: TextAlign.right,
+        ),
+        leading: const Text(''),
+        centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.horizontal(
             left: Radius.circular(40),
@@ -49,11 +49,22 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
                   // maxLength: 20,
                   readOnly: true,
                   textAlign: TextAlign.right,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'قائمة منازلي',
                     contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                     border: InputBorder.none,
-                    prefixIcon: Icon(Icons.add),
+                    prefixIcon: IconButton(
+                      icon: const Icon(
+                          // Based on passwordVisible state choose the icon
+                          Icons.add),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CreateHouseAccount()),
+                        );
+                      },
+                    ),
                   ),
                 )),
             // // ListTile(
@@ -263,32 +274,65 @@ class _ListOfHouseAccountsState extends State<ListOfHouseAccounts> {
   int index = 0;
   Widget buildBottomNavigation() {
     return BottomNavyBar(
-      selectedIndex: index,
-      onItemSelected: (index) => setState(
-        () => this.index = index,
-      ),
+      selectedIndex: global.index,
+      onItemSelected: (index) {
+        setState(
+          () => global.index = index,
+        );
+        if (global.index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateHouseAccount()),
+          );
+        } else if (global.index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListOfHouseAccounts()),
+          );
+        }
+      },
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
           icon: const Icon(Icons.person_outline_rounded),
+          // icon: IconButton(
+          //     icon: const Icon(Icons.person_outline_rounded),
+          //     onPressed: () {
+          //       setState(
+          //         () => this.index = index,
+          //       );
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => const CreateHouseAccount()),
+          //       );
+          //     }),
           title: const Text(
             'الملف الشخصي',
             textAlign: TextAlign.center,
           ),
           activeColor: Colors.lightBlue,
         ),
-        // BottomNavyBarItem(
-        //     icon: InkWell(onTap: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //             builder: (context) => const ListOfHouseAccounts()),
-        //       );
-        //     }, Icon(Icons.holiday_village_rounded)),
-        //     title: const Text(
-        //       'منازلي',
-        //       textAlign: TextAlign.center,
-        //     ),
-        //     activeColor: Colors.lightBlue),
+        BottomNavyBarItem(
+            icon: const Icon(Icons.holiday_village_rounded),
+            // icon: IconButton(
+            //     icon: const Icon(Icons.holiday_village_rounded),
+            //     onPressed: () {
+
+            //       setState(
+            //         () => this.index = index,
+            //       );
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => const ListOfHouseAccounts()),
+            //       );
+            //     }),
+            title: const Text(
+              'منازلي',
+              textAlign: TextAlign.center,
+            ),
+            activeColor: Colors.lightBlue),
       ],
       mainAxisAlignment: MainAxisAlignment.spaceAround,
     );
