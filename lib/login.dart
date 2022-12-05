@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'list_of_house_accounts.dart';
 import 'register.dart';
 
 class loginPage extends StatefulWidget {
@@ -73,7 +74,7 @@ class loginFormState extends State<loginForm> {
             const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 15),
         child: ListView(children: <Widget>[
           Image.asset(
-            'assets/images/logo.jpg',
+            'assets/images/logo.png',
             height: 200,
             width: 200,
           ),
@@ -105,7 +106,7 @@ class loginFormState extends State<loginForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال اسم المستخدم';
                   }
                   return null;
                 },
@@ -154,7 +155,7 @@ class loginFormState extends State<loginForm> {
                   if (value == null ||
                       value.isEmpty ||
                       (value.trim()).isEmpty) {
-                    return 'Please enter a title.';
+                    return 'الرجاء ادخال كلمة السر';
                   }
                   return null;
                 },
@@ -164,18 +165,17 @@ class loginFormState extends State<loginForm> {
           Container(
               child: ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.validate())
-                //       Navigator.push(
-                // context,
-                // MaterialPageRoute(
-                //   builder: (context) => homePage(),
-                // ));
+              if (_formKey.currentState!.validate()) {
                 clearForm();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ListOfHouseAccounts(),
+                    ));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('تم تسجيل دخولك بنجاح'),
-                    backgroundColor: Colors.green),
-              );
+                    backgroundColor: Colors.green));
+              }
             },
             child: Text('تسجيل الدخول'),
             style: ElevatedButton.styleFrom(

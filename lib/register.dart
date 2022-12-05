@@ -111,7 +111,7 @@ class registerFormState extends State<registerForm> {
             height: 20,
           ),
           Image.asset(
-            'assets/images/logo.jpg',
+            'assets/images/logo.png',
             height: 100,
             width: 100,
           ),
@@ -325,7 +325,7 @@ class registerFormState extends State<registerForm> {
           Container(
               child: ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.validate())
+              if (_formKey.currentState!.validate()) {
                 //       Navigator.push(
                 // context,
                 // MaterialPageRoute(
@@ -336,6 +336,7 @@ class registerFormState extends State<registerForm> {
                       content: Text('تم تسجيلك بنجاح'),
                       backgroundColor: Colors.green),
                 );
+              }
             },
             child: Text('تسجيل'),
             style: ElevatedButton.styleFrom(

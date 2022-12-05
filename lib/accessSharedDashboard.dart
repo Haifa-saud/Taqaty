@@ -81,7 +81,7 @@ class loginFormState extends State<loginForm> {
         padding: const EdgeInsets.all(15),
         child: ListView(children: <Widget>[
           Image.asset(
-            'assets/images/logo.jpg',
+            'assets/images/logo.png',
             height: 200,
             width: 200,
           ),
@@ -156,18 +156,18 @@ class loginFormState extends State<loginForm> {
               ),
             ),
           )),
-          SfCartesianChart(
-              primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Devices')),
-              primaryYAxis: NumericAxis(title: AxisTitle(text: 'kWh')),
-              series: <ChartSeries<ChartData, String>>[
-                // Renders column chart
-                ColumnSeries<ChartData, String>(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    dataSource: chartData,
-                    dataLabelSettings: DataLabelSettings(isVisible: true),
-                    xValueMapper: (ChartData data, _) => data.x,
-                    yValueMapper: (ChartData data, _) => data.y),
-              ]),
+          // SfCartesianChart(
+          //     primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Devices')),
+          //     primaryYAxis: NumericAxis(title: AxisTitle(text: 'kWh')),
+          //     series: <ChartSeries<ChartData, String>>[
+          //       // Renders column chart
+          //       ColumnSeries<ChartData, String>(
+          //           borderRadius: BorderRadius.all(Radius.circular(20)),
+          //           dataSource: chartData,
+          //           dataLabelSettings: DataLabelSettings(isVisible: true),
+          //           xValueMapper: (ChartData data, _) => data.x,
+          //           yValueMapper: (ChartData data, _) => data.y),
+          //     ]),
         ]),
       ),
     );

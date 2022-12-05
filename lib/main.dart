@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: new ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 147, 191, 128),
+          )),
           scaffoldBackgroundColor: Colors.white,
           fontFamily: 'LamaSans',
           textTheme: TextTheme()),
@@ -51,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
                 padding: EdgeInsets.only(top: 50),
                 child: Image.asset(
-                  'assets/images/logo.jpg',
+                  'assets/images/logo.png',
                   height: 200,
                   width: 200,
                 )),
@@ -70,7 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => loginPage(),
                         ));
                   },
-                  child: Text(' تسجيل الدخول'),
+                  child: Text(
+                    ' تسجيل الدخول',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -88,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => register(),
                         ));
                   },
-                  child: Text(' تسجيل جديد'),
+                  child: Text(' تسجيل جديد', style: TextStyle(fontSize: 17)),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -106,7 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => accsessShared(),
                         ));
                   },
-                  child: Text('لوحة المنزل المشتركة'),
+                  child: Text('لوحة المنزل المشتركة',
+                      style: TextStyle(fontSize: 17)),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -124,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => devicesList(),
                         ));
                   },
-                  child: Text('قائمة الاجهزة'),
+                  child: Text('قائمة الاجهزة', style: TextStyle(fontSize: 17)),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
