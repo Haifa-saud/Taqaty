@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.17.0
   lite_rolling_switch: ^1.0.0
   syncfusion_flutter_charts: ^20.3.59
+  dropdown_textfield: ^1.0.7
 
 dev_dependencies:
   flutter_test:

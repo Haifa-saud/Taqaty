@@ -45,11 +45,6 @@ class _registerState extends State<register> {
             onPressed: () {
               clearForm();
               Navigator.of(context).pop();
-              setState(() {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('الانتقال الى الصفحة السابقة')),
-                );
-              });
             },
           ),
         ],

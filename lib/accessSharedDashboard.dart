@@ -38,11 +38,6 @@ class _accsessSharedState extends State<accsessShared> {
             onPressed: () {
               clearForm();
               Navigator.of(context).pop();
-              setState(() {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('الانتقال الى الصفحة السابقة')),
-                );
-              });
             },
           ),
         ],

@@ -39,11 +39,6 @@ class _loginPageState extends State<loginPage> {
             onPressed: () {
               clearForm();
               Navigator.of(context).pop();
-              setState(() {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('الانتقال الى الصفحة السابقة')),
-                );
-              });
             },
           ),
         ],

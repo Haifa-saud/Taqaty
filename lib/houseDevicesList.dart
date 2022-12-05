@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hackathon/addDevice.dart';
 import 'package:intl/intl.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
@@ -17,53 +19,160 @@ class _devicesListState extends State<devicesList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFFFFFFF),
-          foregroundColor: Colors.black87,
-          centerTitle: true,
-          title: Text(
+          title: const Text(
             'البيت',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
           leading: //Icon(Icons.more_vert)
               PopupMenuButton(
             onSelected: (value) {
+              if (value == 'share') {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text(
+                      "مشاركة لوحة المعلومات",
+                      textAlign: TextAlign.center,
+                    ),
+                    content: const Text(
+                      'رجاء ادخل رقم جوال لمشاركة لوحة المعلومات',
+                      textAlign: TextAlign.right,
+                    ),
+                    actions: <Widget>[
+                      TextFormField(
+                        textAlign: TextAlign.right,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 13.0, horizontal: 15),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          filled: true,
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: " رقم الهاتف",
+                        ),
+                        // The validator receives the text that the user has entered.
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '  رجاء ادخل رقم هاتف';
+                          }
+                          if (value.length < 10) {
+                            return '  رجاء ادخل رقم هاتف صحيح';
+                          }
+                          return null;
+                        },
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("الغاء"),
+                        ),
+                      ),
+                      //log in ok button
+                      TextButton(
+                        onPressed: () {
+                          // pop out
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("مشاركة",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 35, 129, 6))),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const Share()),
+                // );
+              }
+              if (value == 'delete') {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text(
+                      "حذف المنزل",
+                      textAlign: TextAlign.center,
+                    ),
+                    content: const Text(
+                      "هل أنت متأكد من حذف حساب المنزل ؟",
+                      textAlign: TextAlign.right,
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("الغاء"),
+                        ),
+                      ),
+                      //log in ok button
+                      TextButton(
+                        onPressed: () {
+                          // pop out
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: const Text("حذف",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 164, 10, 10))),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
               // your logic
             },
             itemBuilder: (BuildContext bc) {
               return const [
                 PopupMenuItem(
-                  child: Text("خيار ١"),
-                  value: '/hello',
+                  child: Text("مشاركة لوحة المعلومات "),
+                  value: 'share',
                 ),
                 PopupMenuItem(
-                  child: Text("خيار ٢"),
-                  value: '/about',
+                  child: Text("حذف حساب المنرل",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 167, 32, 32))),
+                  value: 'delete',
                 ),
-                PopupMenuItem(
-                  child: Text("خيار ٣"),
-                  value: '/contact',
-                )
               ];
             },
           ),
           actions: [
             IconButton(
-              icon: const Icon(
-                Icons.arrow_forward_ios,
-              ),
+              icon: const Icon(Icons.arrow_forward_ios),
               onPressed: () {
                 clearForm();
                 Navigator.of(context).pop();
-                setState(() {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('الانتقال الى الصفحة السابقة')),
-                  );
-                });
               },
             ),
           ],
-          // elevation: 15,
+          //elevation: 35,
         ),
+        //  clearForm();
+        //       Navigator.of(context).pop();
+        //       setState(() {
+        //         ScaffoldMessenger.of(context).showSnackBar(
+        //           const SnackBar(
+        //               content: Text('الانتقال الى الصفحة السابقة')),
+        //         );
+        //       });
         body: Column(
           children: [
             Container(
@@ -72,11 +181,20 @@ class _devicesListState extends State<devicesList> {
                   // maxLength: 20,
                   readOnly: true,
                   textAlign: TextAlign.right,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'قائمة الأجهزة',
                     contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                     border: InputBorder.none,
-                    prefixIcon: Icon(Icons.add),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => add_device(),
+                            ));
+                      },
+                    ),
                   ),
                 )),
             Expanded(
